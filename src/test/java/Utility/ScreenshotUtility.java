@@ -18,7 +18,6 @@ public class ScreenshotUtility {
 
 	private WebDriver driver;
 
-
 	public ScreenshotUtility(WebDriver driver) {
 		this.driver = driver;
 		PageFactory.initElements(driver, this);
@@ -26,7 +25,7 @@ public class ScreenshotUtility {
 
 	public void takeScreenshot(String fileName) {
 		try {
-			//Capture screenshot of the current page
+			// Capture screenshot of the current page
 			File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 			FileUtils.copyFile(scrFile,
 					new File("D:\\Cucumber_Projects\\BDD_Framework\\ScreenShots\\" + fileName + ".png"));
@@ -34,28 +33,25 @@ public class ScreenshotUtility {
 			System.out.println("Exception while taking screenshot: " + e.getMessage());
 		}
 	}
-	
+
 	public void takeScreenshotOfElement(WebElement element, String fileName) {
-        try {
-            // Capture screenshot of the specific element
-            File screenshot = element.getScreenshotAs(OutputType.FILE);
-            FileUtils.copyFile(screenshot, new File(fileName + ".png"));
-        } catch (IOException e) {
-            System.out.println("Exception while taking element screenshot: " + e.getMessage());
-        }
-    }
-	
+		try {
+			// Capture screenshot of the specific element
+			File screenshot = element.getScreenshotAs(OutputType.FILE);
+			FileUtils.copyFile(screenshot, new File(fileName + ".png"));
+		} catch (IOException e) {
+			System.out.println("Exception while taking element screenshot: " + e.getMessage());
+		}
+	}
+
 	public void takeScreenshotOfElements(List<WebElement> element, String fileName) {
-        try {
-            // Capture screenshot of the specific element
-            File screenshot = ((TakesScreenshot) element).getScreenshotAs(OutputType.FILE);
-            FileUtils.copyFile(screenshot, new File(fileName + ".png"));
-        } catch (IOException e) {
-            System.out.println("Exception while taking element screenshot: " + e.getMessage());
-        }
-    }
+		try {
+			// Capture screenshot of the specific element
+			File screenshot = ((TakesScreenshot) element).getScreenshotAs(OutputType.FILE);
+			FileUtils.copyFile(screenshot, new File(fileName + ".png"));
+		} catch (IOException e) {
+			System.out.println("Exception while taking element screenshot: " + e.getMessage());
+		}
+	}
 
-	
 }
-
-

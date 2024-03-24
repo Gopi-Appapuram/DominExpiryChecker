@@ -27,13 +27,12 @@ public class AcademyHomePage {
 	@FindBy(xpath = "//a[@class='desktop-submit']")
 	WebElement searchButton;
 
-	
 	public void searchForProduct(String productname) {
 		highlighter.highlightElement(searchInput);
 		searchInput.sendKeys(productname);
 
 	}
-	
+
 	public void clicksearchbtn() {
 		highlighter.highlightElement(searchButton);
 		searchButton.click();
@@ -44,5 +43,4 @@ public class AcademyHomePage {
 		PageFactory.initElements(driver, this);
 		this.highlighter = new SeleniumHighlighterUtility(driver);
 	}
-
 }

@@ -38,7 +38,7 @@ public class CartPage {
 	public void removeAllItemsFromCart() {
 		if (productCheckbox.isEmpty()) {
 			System.out.println("No items in the cart");
-			//screenshot.takeScreenshotOfElements(productCheckbox, "checkbox");
+			// screenshot.takeScreenshotOfElements(productCheckbox, "checkbox");
 		} else {
 			for (int i = 0; i < productCheckbox.size(); i++) {
 				if (i % 2 == 0) {

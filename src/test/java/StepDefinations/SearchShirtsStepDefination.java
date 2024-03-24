@@ -48,7 +48,7 @@ public class SearchShirtsStepDefination {
 		searchPage = new SearchResultPage(driver);
 		ProductDetails = new ProductDetailsPage(driver);
 		cart = new CartPage(driver);
-		
+
 	}
 
 	@Given("I am on the Academy website")
@@ -63,7 +63,7 @@ public class SearchShirtsStepDefination {
 
 	@When("I search for {string} in the search textbox")
 	public void iSearchForInSearchTextbox(String productname) {
-		//homepage = new AcademyHomePage(driver);
+		// homepage = new AcademyHomePage(driver);
 		homepage.searchForProduct(productname);
 		homepage.clicksearchbtn();
 
@@ -71,27 +71,27 @@ public class SearchShirtsStepDefination {
 
 	@Then("I can see list of product list page")
 	public void i_can_see_list_of_product_list() {
-		//searchPage = new SearchResultPage(driver);
+		// searchPage = new SearchResultPage(driver);
 		searchPage.isProdListDisplayed();
 	}
 
 	@Given("I can see list of products")
 	public void i_can_see_list_of_products() {
-		//searchPage = new SearchResultPage(driver);
+		// searchPage = new SearchResultPage(driver);
 		searchPage.isProdListDisplayed();
 
 	}
 
 	@When("I applied any filter for price range")
 	public void i_applied_any_filter_for_price_range() {
-		//searchPage = new SearchResultPage(driver);
+		// searchPage = new SearchResultPage(driver);
 		searchPage.selectPriceRange();
 		Screenshot.takeScreenshot("Pricerange");
 	}
 
 	@Then("I can see only products within the specified price range")
 	public void i_can_see_only_products_within_the_specified_price_range() throws Exception {
-		//searchPage = new SearchResultPage(driver);
+		// searchPage = new SearchResultPage(driver);
 		searchPage.FiltersChecked();
 		Screenshot.takeScreenshot("Filters_checked");
 	}
@@ -99,7 +99,7 @@ public class SearchShirtsStepDefination {
 	@And("I select a product with any index from the list")
 	public void iSelectAProductFromList() throws Exception {
 
-		//searchPage = new SearchResultPage(driver);
+		// searchPage = new SearchResultPage(driver);
 		searchPage.clickOnAnyItem();
 		Screenshot.takeScreenshot("SelectedItem");
 		// Get the current window handle
@@ -116,9 +116,9 @@ public class SearchShirtsStepDefination {
 
 	@When("I am on the product details page")
 	public void i_am_on_the_product_details_page() {
-		//ProductDetails = new ProductDetailsPage(driver);
+		// ProductDetails = new ProductDetailsPage(driver);
 		System.out.println("You are on " + ProductDetails.productDetaiMetaTitle() + "page.");
-		//Screenshot.takeScreenshot("Product_Meta_Title");
+		// Screenshot.takeScreenshot("Product_Meta_Title");
 	}
 
 	@Then("I should see the product name and price")
@@ -128,7 +128,7 @@ public class SearchShirtsStepDefination {
 //		Set<String> windowhandels = driver.getWindowHandles();
 //		List<String> tabs= new ArrayList <String>(windowhandels);
 //	    driver.switchTo().window(tabs.get(1));
-		//ProductDetails = new ProductDetailsPage(driver);
+		// ProductDetails = new ProductDetailsPage(driver);
 		String Brand = ProductDetails.getProductBrand();
 		String Name = ProductDetails.getProductName();
 		String Price = ProductDetails.getProductPrice();
@@ -142,7 +142,7 @@ public class SearchShirtsStepDefination {
 		// Assertion to check if the product price is displayed
 		boolean isProductPriceDisplayed = ProductDetails.ProdPriceisDisplayed();
 		Assert.assertTrue(isProductPriceDisplayed, "Product price is not displayed.");
-		
+
 		// Print Product Name and Price
 		System.out.println("Product Brand: " + Brand);
 		System.out.println("Product Name: " + Name);
@@ -171,7 +171,7 @@ public class SearchShirtsStepDefination {
 	public void i_add_the_item_to_the_cart() throws Exception {
 		ProductDetails.addToBag();
 	}
-	
+
 	@And("I am on cart page")
 	public void i_am_on_cart_page() throws Exception {
 		ProductDetails.clickCartIcon();

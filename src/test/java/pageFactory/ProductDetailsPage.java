@@ -131,10 +131,10 @@ public class ProductDetailsPage {
 	public void addToBag() throws Exception {
 		highlighter.highlightElement(addToBag, "2px Solid black");
 		addToBag.click();
-		if(alertMessageOfAddToBag.getText().equals("Added to bag")) {
-		    System.out.println("Product added successfully");
+		if (alertMessageOfAddToBag.getText().equals("Added to bag")) {
+			System.out.println("Product added successfully");
 		} else {
-		    System.out.println("Please try again to add the product to the cart");
+			System.out.println("Please try again to add the product to the cart");
 		}
 		Thread.sleep(5000);
 //		if (addToBag.getText().equals("GO TO BAG")) {
@@ -149,7 +149,6 @@ public class ProductDetailsPage {
 //		System.out.println("Please try again to add the product to the cart");
 //		}
 	}
-	
 
 //	public void nofItemsInCart() {
 //		if (nofCartItems.isDisplayed()) {

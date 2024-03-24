@@ -71,11 +71,11 @@ public class SearchResultPage {
 		System.out.println("filters are " + maxPriceFilters);
 		ramdomPriceFilter = random.nextInt(maxPriceFilters);
 		scroll.scrollElementIntoView(priceCheckbox.get(ramdomPriceFilter));
-		
+
 		try {
 			priceCheckbox.get(ramdomPriceFilter).click();
 			Thread.sleep(5000);
-			} catch (Exception e) {
+		} catch (Exception e) {
 			System.out.println(e);
 		}
 	}
