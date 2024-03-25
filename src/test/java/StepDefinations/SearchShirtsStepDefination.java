@@ -1,17 +1,12 @@
 package StepDefinations;
 
 import java.time.Duration;
-import java.util.ArrayList;
-
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
 
 import Utility.ScreenshotUtility;
 import Utility.SeleniumHighlighterUtility;
-import io.cucumber.java.After;
 import io.cucumber.java.Before;
-import io.cucumber.java.Scenario;
 import io.cucumber.java.en.And;
 import io.cucumber.java.en.Given;
 import io.cucumber.java.en.Then;
@@ -93,7 +88,7 @@ public class SearchShirtsStepDefination {
 	public void i_can_see_only_products_within_the_specified_price_range() throws Exception {
 		// searchPage = new SearchResultPage(driver);
 		searchPage.FiltersChecked();
-		Screenshot.takeScreenshot("Filters_checked");
+			Screenshot.takeScreenshot("Filters_checked");
 	}
 
 	@And("I select a product with any index from the list")
@@ -198,11 +193,11 @@ public class SearchShirtsStepDefination {
 	public void user_should_see_an_empty_cart() {
 		cart.isCartEmpty();
 		Screenshot.takeScreenshot("Empty_Cart_Page");
-		driver.close();
 	}
-	
+
 	@Then("Close the browser")
 	public void close_the_browser() {
+		driver.close();
 		driver.quit();
 	}
 

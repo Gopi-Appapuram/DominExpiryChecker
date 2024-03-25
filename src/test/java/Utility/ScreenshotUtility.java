@@ -28,7 +28,7 @@ public class ScreenshotUtility {
 			// Capture screenshot of the current page
 			File scrFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 			FileUtils.copyFile(scrFile,
-					new File("D:\\Cucumber_Projects\\BDD_Framework\\ScreenShots\\" + fileName + ".png"));
+					new File("D:\\ESoft_Solutions\\AutomationPractice\\BDD_Framework\\ScreenShots\\" + fileName + ".png"));
 		} catch (IOException e) {
 			System.out.println("Exception while taking screenshot: " + e.getMessage());
 		}
