@@ -189,18 +189,20 @@ public class SearchShirtsStepDefination {
 //	}
 
 	@When("User removes the items from the cart")
-	public void user_removes_the_items_from_the_cart() {
-		cart.removeAllItemsFromCart();
+	public void user_removes_the_items_from_the_cart() throws Exception {
+		cart.selectAllItemsFromCart();
+		cart.removeAllItems();
 	}
 
 	@Then("User should see an empty cart")
 	public void user_should_see_an_empty_cart() {
 		cart.isCartEmpty();
+		Screenshot.takeScreenshot("Empty_Cart_Page");
+		driver.close();
 	}
-
+	
 	@Then("Close the browser")
 	public void close_the_browser() {
-		driver.close();
 		driver.quit();
 	}
 

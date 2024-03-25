@@ -26,7 +26,7 @@ public class SearchResultPage {
 	@FindBys(@FindBy(xpath = "(//ul[@class='results-base']//li[@class='product-base'])"))
 	List<WebElement> productList;
 
-	@FindBys(@FindBy(xpath = "(//label[@class='common-customCheckbox vertical-filters-label']/input[@class='price-input'])"))
+	@FindBys(@FindBy(xpath = "(//ul[@class = 'price-list']//label//input[@type ='checkbox'])"))
 	List<WebElement> priceCheckbox;
 
 	public SearchResultPage(WebDriver driver) {
@@ -39,10 +39,10 @@ public class SearchResultPage {
 	public boolean isProdListDisplayed() {
 		int prodlist = productList.size();
 		try {
-			System.out.println("Elements:" + prodlist + ".");
+			System.out.println("Total no of products in the list are :" + prodlist + ".");
 			return prodlist > 0;
 		} catch (NullPointerException e) {
-			System.out.println("Product list element is null.");
+			System.out.println("Product list is empty.");
 			return false;
 		}
 	}
@@ -68,7 +68,7 @@ public class SearchResultPage {
 	public void selectPriceRange() {
 		Random random = new Random();
 		maxPriceFilters = priceCheckbox.size();
-		System.out.println("filters are " + maxPriceFilters);
+		System.out.println("Total no of proce filter are: " + maxPriceFilters);
 		ramdomPriceFilter = random.nextInt(maxPriceFilters);
 		scroll.scrollElementIntoView(priceCheckbox.get(ramdomPriceFilter));
 

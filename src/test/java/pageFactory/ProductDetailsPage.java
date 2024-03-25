@@ -129,14 +129,15 @@ public class ProductDetailsPage {
 	}
 
 	public void addToBag() throws Exception {
-		highlighter.highlightElement(addToBag, "2px Solid black");
+		highlighter.highlightElement(addToBag);
 		addToBag.click();
+		Thread.sleep(1500);
 		if (alertMessageOfAddToBag.getText().equals("Added to bag")) {
 			System.out.println("Product added successfully");
 		} else {
 			System.out.println("Please try again to add the product to the cart");
 		}
-		Thread.sleep(5000);
+		Thread.sleep(3000);
 //		if (addToBag.getText().equals("GO TO BAG")) {
 //			System.out.println("Product added successfully");
 //			if (nofCartItems.isDisplayed()) {

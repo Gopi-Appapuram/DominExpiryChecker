@@ -25,8 +25,14 @@ public class CartPage {
 	@FindBys(@FindBy(xpath = "(//body/div[@class='layout']/div[@id='mountRoot']/div[@id='appContent']/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[2]/div[3]//*[name()='svg'])"))
 	List<WebElement> productCheckbox;
 
+	@FindBys(@FindBy(xpath = "(//div[contains(@class,'itemComponents-base-selectionIconContainer')])"))
+	List<WebElement> checkBoxArea;
+
 	@FindBys(@FindBy(xpath = "(//body/div[@class='layout']/div[@id='mountRoot']/div[@id='appContent']/div[1]/div[1]/div[1]/div[1]/div[1]/div[4]/div[1]/div[1]/div[1]/div[2]/div[3]//*[name()='svg']//*[name()='path' and contains(@fill,'#000')])"))
 	List<WebElement> productCrossMark;
+
+	@FindBys(@FindBy(xpath = "(//button[contains(text(),'REMOVE')])"))
+	List<WebElement> removeButton;
 
 	public CartPage(WebDriver driver) {
 		this.driver = driver;
@@ -35,50 +41,57 @@ public class CartPage {
 		this.highlighter = new SeleniumHighlighterUtility(driver);
 	}
 
-	public void removeAllItemsFromCart() {
-		if (productCheckbox.isEmpty()) {
-			System.out.println("No items in the cart");
-			// screenshot.takeScreenshotOfElements(productCheckbox, "checkbox");
-		} else {
-			for (int i = 0; i < productCheckbox.size(); i++) {
-				if (i % 2 == 0) {
-					WebElement checkbox = productCheckbox.get(i);
-					scroll.scrollElementIntoView(checkbox);
-					// highlighter.highlightElement(checkbox);
-					if (checkbox.isSelected()) {
-						highlighter.highlightElement(checkbox, "2px Solid black");
-					} else {
-						highlighter.highlightElement(checkbox);
-						checkbox.click();
-					}
-
+	public void selectAllItemsFromCart() throws InterruptedException {
+		if (brandNameInCart.isEmpty()) {
+	        System.out.println("Cart is already empty");
+	    } else {
+			for (int i = 0; i >= checkBoxArea.size(); i++) {
+				WebElement checkbox = checkBoxArea.get(i);
+				scroll.scrollElementIntoView(checkbox);
+				// highlighter.highlightElement(checkbox);
+				if (checkbox.isSelected()) {
+					highlighter.highlightElement(checkbox);
+					Thread.sleep(3000);
+				} else {
+					highlighter.highlightElement(checkbox);
+					checkbox.click();
+					Thread.sleep(3000);
 				}
+
 			}
+
 		}
 	}
 
-//	public void isItemsAvilableInCart() {
-//		if(productCheckbox.isEmpty()) {
-//			System.out.println("No Products In The Cart");
-//		}else {
-//			highlighter.highlightElements(brandNameInCart);
-//			System.out.println("Items are avilable in the cart");
-//		}
-//	}
+	public void removeAllItems() throws Exception {
+		highlighter.highlightElement(removeButton.get(0));
+		removeButton.get(0).click();
+		Thread.sleep(5000);
+		highlighter.highlightElement(removeButton.get(1));
+		removeButton.get(1).click();
+		Thread.sleep(5000);
+
+	}
+
+	/*
+	 * public void isItemsAvilableInCart() { if(productCheckbox.isEmpty()) {
+	 * System.out.println("No Products In The Cart"); }else {
+	 * highlighter.highlightElements(brandNameInCart);
+	 * System.out.println("Items are avilable in the cart"); } }
+	 */
 
 	public void isCartEmpty() {
-		if (productCheckbox.isEmpty()) {
+		if (checkBoxArea.isEmpty()) {
 			System.out.println("Cart is empty");
+			
 		} else {
 			// highlighter.highlightElements(productCheckbox);
-			System.out.println("The list of products in the cart are: ");
-			for (int i = 0; i < productCheckbox.size(); i++) {
-				if (i % 2 == 0) {
-					String ProductNameInCart = brandNameInCart.get(i).getText();
-					System.out.println("The products are " + ProductNameInCart + ".");
-				}
-
+			for (int i = 0; i < checkBoxArea.size(); i++) {
+				System.out.println("The list of products in the cart are: ");
+				String ProductNameInCart = brandNameInCart.get(i).getText();
+				System.out.println("The products are " + ProductNameInCart + ".");
 			}
+
 		}
 	}
 }
