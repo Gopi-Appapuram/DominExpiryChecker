@@ -53,8 +53,18 @@ public class SearchResultPage {
 		int randomProduct = random.nextInt(maxProducts);
 		// Click on the product
 		scroll.scrollElementIntoView(productList.get(randomProduct));
-		productList.get(randomProduct).click();
-		Thread.sleep(5000);
+		productList.get(randomProduct).click(); 
+		Thread.sleep(3000);
+//		String mainWindowHandle = driver.getWindowHandle();
+//		// Switch to the new window
+//		for (String windowHandle : driver.getWindowHandles()) {
+//			if (!windowHandle.equals(mainWindowHandle)) {
+//				driver.switchTo().window(windowHandle);
+//				break;
+//			}
+//		}
+		
+
 	}
 
 	public String searchPageTitle() {

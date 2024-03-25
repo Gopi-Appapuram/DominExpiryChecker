@@ -170,6 +170,10 @@ public class ProductDetailsPage {
 			System.out.println("You are in " + driver.getTitle() + " page\"");
 		}
 	}
+	
+	public void CartPageTitle() {
+		
+	}
 
 	public void clickWishListIcon() {
 		wishListIcon.click();

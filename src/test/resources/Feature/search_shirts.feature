@@ -15,11 +15,20 @@ Feature: Myntra Application Testing
     Given I am on the product details page
     Then I should see the product name and price
 
-  Scenario: Add Product to Cart
+  Scenario: Add a product to Cart
     Given I selected a product variant from the list
     When I add the item to the cart
     And I am on cart page
     Then I can see the item in the cart
+    
+	Scenario: Navigate to previous page 
+		Given Navigate to search details page
+		When I select a product with any index from the list
+		Then I can see list of products and names
+		And I selected a product variant from the list
+    When I add the item to the cart
+    And I am on cart page
+		
 
   Scenario: Remove Product from Cart
     Given I can see the item in the cart
