@@ -1,7 +1,7 @@
 Feature: Myntra Application Testing
-
+	
   Scenario: Search for a Product
-    Given I am on the Academy website
+    Given I am on the Myntra website
     When I search for "Sheos" in the search textbox
     Then I can see list of product list page
 
@@ -21,10 +21,10 @@ Feature: Myntra Application Testing
     And I am on cart page
     Then I can see the item in the cart
     
-	Scenario: Navigate to previous page 
+	Scenario: Navigate to Search  page 
 		Given Navigate to search details page
-		When I select a product with any index from the list
-		Then I can see list of products and names
+		When I select another product with any index from the list
+		Then I should see the product name and price
 		And I selected a product variant from the list
     When I add the item to the cart
     And I am on cart page

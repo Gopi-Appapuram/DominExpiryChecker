@@ -32,6 +32,12 @@ public class SearchShirtsStepDefination {
 	ScreenshotUtility Screenshot;
 	CartPage cart;
 	WindowHangels handels;
+	
+	String HomePageTitle;
+	String SearchPageTitle;
+	String ProductDetailsPageTitle;
+	String CartPageTitle;
+	String CheckOutPageTitle;
 
 	@Before
 	public void setUp() {
@@ -46,15 +52,15 @@ public class SearchShirtsStepDefination {
 
 	}
 
-	@Given("I am on the Academy website")
-	public void iAmOnAcademyWebsite() {
+	@Given("I am on the Myntra website")
+	public void i_am_on_myntra_website() {
 		driver.manage().deleteAllCookies();
 		driver.get("https://www.myntra.com/");
 
 	}
 
 	@When("I search for {string} in the search textbox")
-	public void iSearchForInSearchTextbox(String productname) {
+	public void i_search_for_in_search_textbox(String productname) {
 		homepage.searchForProduct(productname);
 		homepage.clicksearchbtn();
 
@@ -84,9 +90,10 @@ public class SearchShirtsStepDefination {
 	}
 
 	@And("I select a product with any index from the list")
-	public void iSelectAProductFromList() throws Exception {
+	public void i_select_a_product_from_list() throws Exception {
 		searchPage.clickOnAnyItem();
-		//handels.switchToNextTab();
+		ProductDetailsPageTitle = driver.getTitle();
+		// handels.switchToNextTab();
 		Screenshot.takeScreenshot("SelectedItem");
 
 	}
@@ -95,28 +102,26 @@ public class SearchShirtsStepDefination {
 	public void i_am_on_the_product_details_page() {
 		System.out.println("You are on " + ProductDetails.productDetaiMetaTitle() + "page.");
 	}
-
+	
 	@Then("I should see the product name and price")
-	public void iShouldSeeProductNameAndPrice() throws Exception {
-//		Set<String> windowhandels = driver.getWindowHandles();
-//		List<String> tabs= new ArrayList <String>(windowhandels);
-//	    driver.switchTo().window(tabs.get(1));
-		handels.switchToTab(1);
-		String Brand = ProductDetails.getProductBrand();
-		String Name = ProductDetails.getProductName();
-		String Price = ProductDetails.getProductPrice();
+	public void i_should_see_product_name_and_price() throws Exception {
+		//ProductDetailsPageTitle = driver.getTitle();
+		System.out.println(ProductDetailsPageTitle);
+		handels.switchToWindow(ProductDetailsPageTitle);
+		// This is used to check whether the product name and price is displayed or not
 		boolean isProductNameDisplayed = ProductDetails.ProdNameisDisplayed();
 		Assert.assertTrue(isProductNameDisplayed, "Product name is not displayed.");
 		boolean isProductPriceDisplayed = ProductDetails.ProdPriceisDisplayed();
 		Assert.assertTrue(isProductPriceDisplayed, "Product price is not displayed.");
-		System.out.println("Product Brand: " + Brand);
-		System.out.println("Product Name: " + Name);
-		System.out.println("Product Price: " + Price);
-		Screenshot.takeScreenshot("Product_Details");
+		// This is used to print the product brand, name, and price
+		System.out.println("Product Brand: " + ProductDetails.getProductBrand());
+		System.out.println("Product Name: " + ProductDetails.getProductName());
+		System.out.println("Product Price: " + ProductDetails.getProductPrice());
 	}
 
 	@Given("I selected a product variant from the list")
 	public void i_selected_a_product_variant_from_the_list() throws Exception {
+		// Try to select the product color and variant
 		try {
 			ProductDetails.selectProductColour();
 		} catch (Exception e) {
@@ -131,60 +136,74 @@ public class SearchShirtsStepDefination {
 
 	@When("I add the item to the cart")
 	public void i_add_the_item_to_the_cart() throws Exception {
+		// This method is used to add the product to cart by clicking on ADD TO CART
 		ProductDetails.addToBag();
 	}
-
+	
 	@And("I am on cart page")
 	public void i_am_on_cart_page() throws Exception {
+		// This method is used to click the cart icon
 		ProductDetails.clickCartIcon();
+		// This method is used to take the screenshot of the cart page
 		Screenshot.takeScreenshot("Cart_Page");
 	}
 
 	@Then("I can see the item in the cart")
 	public void i_can_see_the_item_in_the_cart() {
+		// This method is used to take the check whether the cart is empty or not
 		cart.isCartEmpty();
 	}
 
 	@When("Navigate to search details page")
 	public void navigate_to_search_page() throws Exception {
-//		String mainWindowHandle = driver.getWindowHandle();
-//		for (String windowHandle : driver.getWindowHandles()) {
-//			if (!windowHandle.equals(mainWindowHandle)) {
-//				driver.switchTo().window(windowHandle);
-//				break;
-//			}
-//		}
-		handels.switchToTab(0);
-		
+		// This method is used to switch to main window (myntra.com) or tab with index 0
+		//handels.switchToTab(0);
+		SearchPageTitle = driver.getTitle();
+		handels.switchToWindow(SearchPageTitle);
 	}
 
-	@When("I can see list of products and names")
-	public void i_added_the_product_to_cart() {
-		handels.switchToTab(2);
-		boolean isProductNameDisplayed = ProductDetails.ProdNameisDisplayed();
-		Assert.assertTrue(isProductNameDisplayed, "Product name is not displayed.");
-		boolean isProductPriceDisplayed = ProductDetails.ProdPriceisDisplayed();
-		Assert.assertTrue(isProductPriceDisplayed, "Product price is not displayed.");
-		System.out.println("Product Brand: " + ProductDetails.getProductBrand());
-		System.out.println("Product Name: " + ProductDetails.getProductName());
-		System.out.println("Product Price: " + ProductDetails.getProductPrice());
+//	@When("I can see list of products and names")
+//	public void i_added_the_product_to_cart() {
+//		// This method is used to switch to tab with index 2
+//		handels.switchToTab(2);
+//		// This is used to check whether the product name and price is displayed or not
+//		boolean isProductNameDisplayed = ProductDetails.ProdNameisDisplayed();
+//		Assert.assertTrue(isProductNameDisplayed, "Product name is not displayed.");
+//		boolean isProductPriceDisplayed = ProductDetails.ProdPriceisDisplayed();
+//		Assert.assertTrue(isProductPriceDisplayed, "Product price is not displayed.");
+//		// This is used to print the product brand, name, and price
+//		System.out.println("Product Brand: " + ProductDetails.getProductBrand());
+//		System.out.println("Product Name: " + ProductDetails.getProductName());
+//		System.out.println("Product Price: " + ProductDetails.getProductPrice());
+//	}
+	
+	@And("I select another product with any index from the list")
+	public void i_Select_Another_Product_From_List() throws Exception {
+		searchPage.clickOnAnyItem();
+		// handels.switchToNextTab();
+		Screenshot.takeScreenshot("SelectedItem");
+
 	}
 
 	@When("User removes the items from the cart")
 	public void user_removes_the_items_from_the_cart() throws Exception {
+		// This is used to select all the products from the cart
 		cart.selectAllItemsFromCart();
+		// This is used to remove all items
 		cart.removeAllItems();
 	}
 
 	@Then("User should see an empty cart")
 	public void user_should_see_an_empty_cart() {
+		// This is used to check whether the cart is empty or not
 		cart.isCartEmpty();
+		// This is used to take the empty cart page
 		Screenshot.takeScreenshot("Empty_Cart_Page");
 	}
 
 	@Then("Close the browser")
 	public void close_the_browser() {
-		driver.close();
+		handels.closeAllTabs();
 		driver.quit();
 	}
 
