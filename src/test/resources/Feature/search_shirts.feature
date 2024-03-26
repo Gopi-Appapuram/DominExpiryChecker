@@ -1,17 +1,17 @@
 Feature: Myntra Application Testing
 	
-  Scenario: Search for a Product
+  Scenario: Search for a product
     Given I am on the Myntra website
     When I search for "Sheos" in the search textbox
     Then I can see list of product list page
 
-  Scenario: Filter Products by Price Range
+  Scenario: Appaly filters for products by price range and select an item
     Given I can see list of products
     When I applied any filter for price range
     Then I can see only products within the specified price range
     And I select a product with any index from the list
 
-  Scenario: Get Product Name and Price
+  Scenario: Get product name and price
     Given I am on the product details page
     Then I should see the product name and price
 
@@ -21,7 +21,7 @@ Feature: Myntra Application Testing
     And I am on cart page
     Then I can see the item in the cart
     
-	Scenario: Navigate to Search  page 
+	Scenario: Navigate to search  page 
 		Given Navigate to search details page
 		When I select another product with any index from the list
 		Then I should see the product name and price
@@ -30,7 +30,7 @@ Feature: Myntra Application Testing
     And I am on cart page
 		
 
-  Scenario: Remove Product from Cart
+  Scenario: Remove product from cart
     Given I can see the item in the cart
     When User removes the items from the cart
     Then User should see an empty cart
