@@ -1,10 +1,12 @@
 package StepDefinations;
 
 import java.time.Duration;
+import java.util.Random;
 
 import org.openqa.selenium.WebDriver;
 import org.testng.Assert;
 
+import Utility.ExcelUtility;
 import Utility.ScreenshotUtility;
 import Utility.SeleniumHighlighterUtility;
 import Utility.WindowHangels;
@@ -20,7 +22,6 @@ import pageFactory.SearchResultPage;
 import pageFactory.WebDriverManager;
 
 public class SearchShirtsStepDefination {
-
 	WebDriver driver;
 	AcademyHomePage homepage;
 	ProductDetailsPage ProductDetails;
@@ -29,7 +30,8 @@ public class SearchShirtsStepDefination {
 	ScreenshotUtility Screenshot;
 	CartPage cart;
 	WindowHangels handels;
-	
+	ExcelUtility excel;
+
 	String HomePageTitle;
 	String SearchPageTitle;
 	String ProductDetailsPageTitle;
@@ -46,18 +48,23 @@ public class SearchShirtsStepDefination {
 		ProductDetails = new ProductDetailsPage(driver);
 		cart = new CartPage(driver);
 		handels = new WindowHangels(driver);
-
+		String path = "D:\\ESoft_Solutions\\AutomationPractice\\BDD_Framework\\Myntra.xlsx";
+		excel = new ExcelUtility(path);		
 	}
 
 	@Given("I am on the Myntra website")
 	public void i_am_on_myntra_website() {
-		driver.manage().deleteAllCookies();
 		driver.get("https://www.myntra.com/");
 
 	}
 
-	@When("I search for {string} in the search textbox")
+	@When("I search for any {string} in the search textbox")
 	public void i_search_for_in_search_textbox(String productname) {
+		excel.setSheet("TestData");
+		int RowSize = excel.rowCount();
+		Random random = new Random(RowSize);
+		int rowNum = random.nextInt(RowSize);
+		productname = excel.readData(rowNum, 0);
 		homepage.searchForProduct(productname);
 		homepage.clicksearchbtn();
 
@@ -99,11 +106,11 @@ public class SearchShirtsStepDefination {
 	public void i_am_on_the_product_details_page() {
 		System.out.println("You are on " + ProductDetails.productDetaiMetaTitle() + "page.");
 	}
-	
+
 	@Then("I should see the product name and price")
 	public void i_should_see_product_name_and_price() throws Exception {
-		//ProductDetailsPageTitle = driver.getTitle();
-		System.out.println(ProductDetailsPageTitle);
+		// ProductDetailsPageTitle = driver.getTitle();
+		// System.out.println(ProductDetailsPageTitle);
 		handels.switchToWindow(ProductDetailsPageTitle);
 		// This is used to check whether the product name and price is displayed or not
 		boolean isProductNameDisplayed = ProductDetails.ProdNameisDisplayed();
@@ -114,6 +121,17 @@ public class SearchShirtsStepDefination {
 		System.out.println("Product Brand: " + ProductDetails.getProductBrand());
 		System.out.println("Product Name: " + ProductDetails.getProductName());
 		System.out.println("Product Price: " + ProductDetails.getProductPrice());
+		excel.setSheet("Product_Details");
+		
+		String[] productDetails = {
+		    ProductDetails.getProductBrand(),
+		    ProductDetails.getProductName(),
+		    ProductDetails.getProductPrice()
+		    
+		};
+		
+		excel.writeData(0, productDetails);
+
 	}
 
 	@Given("I selected a product variant from the list")
@@ -136,7 +154,7 @@ public class SearchShirtsStepDefination {
 		// This method is used to add the product to cart by clicking on ADD TO CART
 		ProductDetails.addToBag();
 	}
-	
+
 	@And("I am on cart page")
 	public void i_am_on_cart_page() throws Exception {
 		// This method is used to click the cart icon
@@ -154,7 +172,7 @@ public class SearchShirtsStepDefination {
 	@When("Navigate to search details page")
 	public void navigate_to_search_page() throws Exception {
 		// This method is used to switch to main window (myntra.com) or tab with index 0
-		//handels.switchToTab(0);
+		// handels.switchToTab(0);
 		SearchPageTitle = driver.getTitle();
 		handels.switchToWindow(SearchPageTitle);
 	}
@@ -173,7 +191,7 @@ public class SearchShirtsStepDefination {
 //		System.out.println("Product Name: " + ProductDetails.getProductName());
 //		System.out.println("Product Price: " + ProductDetails.getProductPrice());
 //	}
-	
+
 	@And("I select another product with any index from the list")
 	public void i_Select_Another_Product_From_List() throws Exception {
 		searchPage.clickOnAnyItem();
@@ -203,5 +221,4 @@ public class SearchShirtsStepDefination {
 		handels.closeAllTabs();
 		driver.quit();
 	}
-
 }

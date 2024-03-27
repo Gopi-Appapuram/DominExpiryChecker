@@ -17,8 +17,10 @@ public class WebDriverManager {
 		if (driver == null) {
 			// Initialize WebDriver
 			driver = new ChromeDriver();
+			driver.manage().deleteAllCookies();
 			driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(30));
 			driver.manage().window().maximize();
+			
 		}
 		return driver;
 	}
