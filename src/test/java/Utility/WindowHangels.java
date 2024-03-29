@@ -26,13 +26,14 @@ public class WindowHangels {
 		driver.switchTo().window(tab.get(i));
 	}
 
-	public void closeAllTabs() {
+	public void closeAllTabs() throws Exception {
 		// Get all window handles
 		Set<String> allWindowHandles = driver.getWindowHandles();
 		// Iterate through each handle and close the window
 		for (String handle : allWindowHandles) {
 			driver.switchTo().window(handle);
 			driver.close();
+			Thread.sleep(2500);
 			//driver.manage().timeouts().implicitlyWait(Duration.ofSeconds(15));
 		}
 	}

@@ -13,7 +13,7 @@ public class SeleniumHighlighterUtility {
 	JavascriptExecutor js;
 
 	public void highlightElement(WebElement productBrand) {
-		highlightElement(productBrand, "2px solid red");
+		highlightElement(productBrand, "2px solid green");
 	}
 
 	public void highlightElement(WebElement element, String highlightStyle) {
